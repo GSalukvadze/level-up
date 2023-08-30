@@ -1,0 +1,22 @@
+<aside class="fixed top-0 left-0 w-72 h-full" aria-label="Sidenav">
+    <div class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <ul class="space-y-2">
+            <li *ngIf="user.createdAt">
+                <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" href="#">
+                    {{ 'created-at' | translate}} - {{user.createdAt | date: 'dd/MM/YY'}}
+                </a>
+            </li>
+            <li *ngIf="user.updatedAt">
+                <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" href="#">
+                    {{'updated-at' | translate}} - {{user.updatedAt | date: 'dd/MM/YY'}}
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" routerLink="/users">
+                    {{ 'close' | translate}}
+                </a>
+            </li>
+            <!-- other list elements -->
+        </ul>
+    </div>
+  </aside>

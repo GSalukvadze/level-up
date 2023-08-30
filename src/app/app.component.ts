@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectLoading } from './store/selectors/users.selectors';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'level-up';
+  title = 'User Managment';
+  isLoading$ = this.store.select(selectLoading)
+
+  constructor(private store: Store) {}
 }

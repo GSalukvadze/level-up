@@ -1,0 +1,108 @@
+<div class="component">
+    <form
+      class="form flex justify-center mt-10 flex-col items-center p-4 border-blue-400"
+      [formGroup]="formGroup"
+    >
+      <h1 class="mb-7 font-semibold">{{ userId ? ('edit-user' | translate) : ('add-user' | translate)}}</h1>
+      <div class="flex flex-col w-[350px] mb-6">
+        <input
+          type="text"
+          class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10"
+          [class.red-border]="checkFormControl('name')"
+          [placeholder]="'name' | translate"
+          formControlName="name"
+        />
+      </div>
+      <div class="flex flex-col w-[350px] mb-6">
+        <input
+          type="text"
+          class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10"
+          [class.red-border]="checkFormControl('surname')"
+          [placeholder]="'surname' | translate"
+          formControlName="surname"
+        />
+      </div>
+      <div class="flex flex-col w-[350px] mb-6">
+        <input
+          type="text"
+          class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10"
+          [class.red-border]="checkFormControl('personalNumber')"
+          [placeholder]="'personal-number' | translate"
+          formControlName="personalNumber"
+        />
+        <div class="text-red-600 mt-2" *ngIf="formGroup.hasError('userExists', 'personalNumber')">
+          {{ 'personal-number-exists' | translate}}
+        </div>
+      </div>
+      <small
+        class="mb-2 font-semibold"
+        [class.red-text]="checkFormControl('gender')"
+        >{{ 'please-choose-gender' | translate}}</small
+      >
+      <div class="flex justify-between w-[350px] mb-6">
+        <label class="flex justify-between gap-[6px]">
+          <input type="radio" value="მამრობითი" formControlName="gender" />
+          <span>{{ 'man' | translate}}</span>
+        </label>
+        <label class="flex justify-between gap-[6px]">
+          <input type="radio" value="მდედრობითი" formControlName="gender" />
+          <span>{{ 'women' | translate}}</span>
+        </label>
+      </div>
+      <div class="flex flex-col w-[350px] mb-6">
+        <select
+        name="city"
+        class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10"
+        [class.red-border]="checkFormControl('city')"
+        formControlName="city"
+      >
+      <option [ngValue]="null" [disabled]="true">{{ 'choose-a-city' | translate}}</option>
+        <option value="{{ city }}" *ngFor="let city of cities">
+          {{ 'cities.' + city | translate }}
+        </option>
+      </select>
+      </div>
+      <div class="flex flex-col w-[350px] mb-6">
+        <input
+          type="text"
+          class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10"
+          [class.red-border]="checkFormControl('address')"
+          [placeholder]="'address' | translate"
+          formControlName="address"
+        />
+      </div>
+      <div class="flex w-[350px] flex-col mb-3" formArrayName="customFields">
+        <!-- List of Custom Fields -->
+        <div *ngFor="let field of customFieldsArray.controls; let i = index" class="flex w-full mb-3 gap-3" [formGroupName]="i">
+          <input type="text" [placeholder]="field.get('name')?.value" formControlName="value" class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10">
+          <button class="bg-red-600 text-white rounded p-1" type="button" (click)="removeCustomField(i)">Remove</button>
+        </div>
+        <input
+          type="text"
+          class="w-full border-[1.5px] border-[#8ac0e2] rounded-md pl-2 h-10 mb-2"
+          [placeholder]="'custom-field-name' | translate"
+          [formControl]="newCustomFieldControl"
+          [class.red-border]="showEmptyCustomFieldError"
+          (input)="showEmptyCustomFieldError = false"
+        >
+        <button class="bg-blue-800 text-white rounded-xl p-2" type="button" (click)="addCustomField()">{{ 'add-field' | translate}}</button>
+      </div>
+      <div class="flex flex-row justify-between w-[350px] mb-10">
+        <button
+          type="button"
+          class="bg-gray-500 text-white rounded-xl p-2"
+          (click)="back()"
+        >              
+          {{ 'cancel' | translate}}
+        </button>
+        <button
+          class="bg-blue-800 text-white rounded-xl p-2"
+          type="button"
+          (click)="addOrUpdateUser()"
+        >
+          {{ 'finish' | translate}}
+        </button>
+      </div>
+    </form>
+  </div>
+  

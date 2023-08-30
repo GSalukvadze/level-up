@@ -1,0 +1,33 @@
+{
+    "add" : "Add",
+    "name": "Name",
+    "surname": "Surname",
+    "personal-number": "Personal number",
+    "gender": "Gender",
+    "city": "City",
+    "address": "Address",
+    "edit": "Edit",
+    "delete": "Delete",
+    "edit-user": "Edit User",
+    "please-choose-gender": "Please choose your gender",
+    "man": "Man",
+    "woman": "Woman",
+    "add-field": "Add field",
+    "custom-field-name": "Custom field name",
+    "cancel": "Cancel",
+    "finish": "Finish",
+    "add-user": "Add user",
+    "updated-at": "Updated At",
+    "created-at": "Created At",
+    "close": "Close",
+    "user-list": "User list",
+    "persona-number-exists": "Personal number already exists",
+    "change-language": "Change language",
+    "cities": {
+        "tbilisi": "Tbilisi",
+        "batumi": "Batumi",
+        "zugdidi": "Zugdidi",
+        "poti": "Poti"
+    },
+    "choose-a-city": "Choose a city"
+}

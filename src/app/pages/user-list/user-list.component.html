@@ -1,0 +1,65 @@
+<section class="h-screen bg-[#f4e3f1]">
+  <section class="flex flex-col items-center">
+    <div class="mt-12 mb-6 flex flex-col align-center gap-4">
+      <button (click)="changeLanguage()" class="bg-blue-800 text-white rounded-xl p-2">
+        {{ 'change-language' | translate }} <!-- Add a translation key for the button text -->
+      </button>
+      <h1 class="font-bold">{{ 'user-list' | translate}}</h1>
+      <button (click)="addUser()" class="bg-blue-800 text-white rounded-xl p-2">
+        {{ 'add' | translate }}
+      </button>
+    </div>
+  </section>
+  <section class="mx-12 border-black border-[1.5px] rounded-[4px] p-[1px]">
+    <p-table
+  *ngIf="users$ | async as users"
+  [value]="users"
+  responsiveLayout="scroll"
+  [paginator]="true"
+  [rows]="5"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>{{ "name" | translate }}</th>
+      <th>{{ "surname" | translate}}</th>
+      <th>{{ "personal-number" | translate}}</th>
+      <th>{{"gender" | translate}}</th>
+      <th>{{"city" | translate}}</th>
+      <th>{{"address" | translate}}</th>
+      <th>{{ "edit" | translate}}</th>
+      <th>{{ "delete" | translate}}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr [routerLink]="[{ outlets: { logInfo: ['logs', user.id] } }]" appHoverHighlight>
+      <td>{{ user.name }}</td>
+      <td>{{ user.surname }}</td>
+      <td>{{ user.personalNumber }}</td>
+      <td>{{ user.gender }}</td>
+      <td>{{ user.city }}</td>
+      <td>{{ user.address }}</td>
+      <td>
+        <button
+          class="bg-blue-800 text-white rounded-xl p-2"
+          [routerLink]="['edit', user.id]"
+          (click)="$event.stopPropagation()"
+        >
+          {{ 'edit' | translate}}
+        </button>
+      </td>
+      <td>
+        <button
+          class="bg-gray-500 text-white rounded-xl p-2"
+          (click)="deleteUser($event, user.id)"
+        >
+          {{ 'delete' | translate}}
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+  </section>
+</section>
+
+<router-outlet></router-outlet>
+<router-outlet name="logInfo"></router-outlet>
